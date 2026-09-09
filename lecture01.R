@@ -86,10 +86,16 @@ w <- c(v, z) # concatenation of vectors
 
 A = matrix(data = c(2, 5, 3, 8, 7, 1), nrow = 2)
 B = matrix(data = c(7, 10, 1, 2, 1, 5), nrow = 3)
+print(A)
+print(B)
+
   # matrix with named rows and columns
   C = matrix( data = c(2, 5, 3, 8), nrow = 2,
               dimnames = list(c('row1', 'row2'), # first argument is for rows
                               c('col1', 'col2'))) # second argument is for columns
+
+print(C)
+
   # define a matrix using row binds and column binds
   # row bind
   d1 <- c(100, 47, 178)
@@ -99,6 +105,7 @@ B = matrix(data = c(7, 10, 1, 2, 1, 5), nrow = 3)
   colnames <- list(c('wage', 'age', 'height'))
   M1 <- rbind(d1, d2, d3)
   dimnames(M1) <- c(rownames, colnames)
+  print(M1)
   
   # column bind
   e1 <- c(2, 5)
@@ -137,7 +144,8 @@ length(w) # number of elements in the new vector
 length(A) # number of elements in the matrix
 dim(A) # dimensions of the matrix
 
-# indexing
+# indexing: select an element from the matrix or vector
+print(v)
 v[1]
 v[2:4]
 v[c(2, 4)]
@@ -157,128 +165,4 @@ na_vector <- c(NA, 1, 2, 3, 4) # missing values are represented by NA (not avail
 # rounding
 sqrt(2)^2 == 2 # why? -> numerical approximation
 round(sqrt(2)^2) == 2 # fixing
-
-# loops
-  # for loop
-  for(i in 1:5){
-    print(paste0("i = ", i))
-  }
-
-  # while loop
-  x <- 100
-  while(x > 10){
-    x <- x - 10
-    print(paste0("There are ", x, " km left."))
-  }
-
-# if conditions
-price_apple <- 105
-price_tesla <- 100
-
-# if apple price is lower buy apple, if bigger buy tesla, if equal print equal
-if(price_apple < price_tesla){
-  print('Buy Apple!')
-} else if(price_apple > price_tesla){
-  print('Buy Tesla!')
-} else {
-  print('Prices are equal!')
-}
-
-## 2) case study: CEO salary ---------------------------------------------------
-# Story: What's the connection between CEO salary and ROE?
-# load CEO salary dataset
-ceo <- ceosal1 # built-in data from wooldridge package
-
-# first look on the data
-str(ceo) # first few rows
-head(ceo) # first five rows
-view(ceo) # whole data
-
-# visualisation in tidyverse
-  # simple scatter plot about ceo salary and roe
-  ggplot(data = ceo,
-         mapping = aes(y = salary,
-                       x = roe)) +
-    geom_point()
-  
-  # save "main settings"
-  roe_salary_plot <- ggplot(data = ceo,
-                            mapping = aes(y = salary,
-                                          x = roe))
-  
-  # add a scatter plot and linear line to the main settings
-  roe_salary_plot +
-    geom_point() +
-    geom_smooth(method = lm)
-  
-  # check which observations are outliers (over 99. percentile) by salary
-    # plot the distribution of the salary
-    ggplot(data = ceo,
-           mapping = aes(x = salary)) +
-      geom_histogram(binwidth = 100) +
-      scale_x_continuous(breaks = seq(0, 15000, by = 3000))
-    
-    quantile(ceo$salary, probs = 0.99)
-  
-  # drop outliers, by salary
-  cutoff <- quantile(ceo$salary, probs = 0.99)
-  ceo <- ceo[ceo$salary < cutoff, ]
-  
-  # how to use with
-  # generate industry variable
-  ceo$industry <- factor(with(ceo, ifelse(indus == 1, 'industrial',
-                                        ifelse(finance == 1, 'financial',
-                                               ifelse(consprod == 1, 'consumer products', 'transport and utility')))))
-  
-  # we have to save main settings again as data has changed
-  roe_salary_plot <- ggplot(data = ceo,
-                            mapping = aes(y = salary,
-                                          x = roe))
-  # colour by industry
-  roe_salary_plot +
-    aes(colour = industry) +
-    geom_point() +
-    geom_smooth(method = lm)
-  
-  # colour only points
-  roe_salary_plot +
-    geom_point(mapping = aes(colour = industry)) +
-    geom_smooth(method = lm)
-  
-  # colour only points but add new color to the line
-  roe_salary_plot +
-    geom_point(mapping = aes(colour = industry)) +
-    geom_smooth(method = lm,
-                colour = 'black')
-  
-  # add labels
-  roe_salary_plot +
-    geom_point(mapping = aes(colour = industry)) +
-    geom_smooth(method = lm,
-                colour = 'black') +
-    labs(y = 'Salary ($1000)',
-         x = 'ROE',
-         color = 'Industry')
-  
-  # make the plot more fancy using AI
-  roe_salary_figuresave <- roe_salary_plot +
-    geom_point(mapping = aes(colour = industry),
-               size = 3,
-               alpha = 0.7) +
-    geom_smooth(method = lm,
-                colour = 'black',
-                linetype = 'dashed',
-                linewidth = 1) +
-    labs(title = 'CEO Salary vs. Return on Equity (ROE)',
-         y = 'Salary ($1000)',
-         x = 'ROE (%)',
-         color = '') +
-    theme_minimal() +
-    theme(text = element_text(size = 14),
-          plot.title = element_text(hjust = 0.5, face = 'bold', size = 16),
-          plot.subtitle = element_text(hjust = 0.5, size = 12),
-          legend.position = 'top') +
-    scale_color_brewer(palette = 'Set1') +
-    scale_x_continuous(breaks = seq(-20, 80, by = 10)) +
-    scale_y_continuous(breaks = seq(0, 6000, by = 500))
 
