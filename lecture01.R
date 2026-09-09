@@ -4,6 +4,8 @@
 #   - Ágoston Reguly, Gábor Békés: Introduction to Data Analysis with R - lecture materials
 #   - Rafael Irizarry: Introduction to Data Science: Data Wrangling and Visualization with R
 
+# Edited using Positron by E. Timár 
+
 ## useful short cuts -----------------------------------------------------------
 # assignment: Alt + - / Option + -
 # pipe operator: Ctrl + Shift + M / Command + Shift + M
@@ -22,41 +24,54 @@ install.packages('wooldridge')
 library(tidyverse)
 library(wooldridge)
 
-## 1) coding basics ------------------------------------------------------------
-# objects and variables
-a <- 2 # numerical
+## 1) Coding basics ------------------------------------------------------------
+# objects and variables: essentially, everything in R is an object 
+
+# we can define numeric R-objects:
+a <- 2 
 b <- 3
 c <- a*b
 
-  # integers and doubles
-  num_val <- as.numeric(1.2)
-  doub_val <- as.double(1.2)
-  int_val <- as.integer(1.2)
-  is.numeric(num_val)
-  is.double(num_val)
-  is.integer(num_val)
+# do mathematical operations with them:
+a+b-(a*b)^a
 
+c <- a + b
+d <- a*c/b*c
+
+
+# define and evaluate logical expressions:
+a == b
+a != b
+equality <- a == b
+ a == a
+1/2 == 0.5
+# negation:
+a != b
+
+# other logical operators for multiple statements
+2 == 2 & 3 == 2  # and
+2 == 2 | 3 == 2  # either/or
+
+# define boolean objects (= TRUE or FALSE):
+male <- TRUE 
+female <- FALSE
+
+# objects can store text (string):
 mystring <- 'Hello' # character/string
 myotherstring <- 'World'
 
-  # string concatenation
-  themstring <- mystring + myotherstring # not working
-  themstring <- paste0(mystring, " ", myotherstring)
+## R has functions: a reusable block of code that executes a task. 
+# R has built-in functions, but you can also create your own. 
 
-male <- TRUE # logical/boolean
-female <- FALSE
+# some built-in functions:
 
-  # logical expression
-  a == b
-  a != b
-  equality <- a == b
-
-# built-in functions
-sqrt(4)
-typeof(male)
-print(c)
-print(themstring)
+sqrt(4)  #calculate the square root of 4
+typeof(male)  #retrieve the type of an object 
+print(c)  #display an object
 print(equality)
+
+print(mystring + myotherstring) 
+paste(mystring, myotherstring)
 
 # vectors
 v <- c(2, 5, 10, 13)
