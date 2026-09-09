@@ -38,7 +38,6 @@ a+b-(a*b)^a
 c <- a + b
 d <- a*c/b*c
 
-
 # define and evaluate logical expressions:
 a == b
 a != b
@@ -73,13 +72,18 @@ print(equality)
 print(mystring + myotherstring) 
 paste(mystring, myotherstring)
 
+?sqrt # get help on a function
+
 # vectors
 v <- c(2, 5, 10, 13)
 z <- c(3, 4, 7, 10)
 u <- c("one", "two", "apple")
 w <- c(v, z) # concatenation of vectors
+  # structure: name of vector <- c('name1', 'name2', 'name3', 'name4')
 
 # matrices
+    # Questionwhat is the difference between a vector and a matrix?
+
 A = matrix(data = c(2, 5, 3, 8, 7, 1), nrow = 2)
 B = matrix(data = c(7, 10, 1, 2, 1, 5), nrow = 3)
   # matrix with named rows and columns
