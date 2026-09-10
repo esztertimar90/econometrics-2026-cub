@@ -107,10 +107,10 @@ t(M)
 dim(M)
 
 
-## 5) Data frames --------------------------------------------------------------
-# this is the most important object for econometrics
+## 6) Data frames --------------------------------------------------------------
+# this is the most important object for econometrics! 
 
-ceo <- ceosal1
+ceo <- ceosal1  # it loads a dataset that is part of the wooldridge package, no need to download it 
 str(ceo)
 head(ceo)
 names(ceo)
@@ -126,7 +126,7 @@ ceo[1:5, c("salary", "roe")]
 # subset by condition
 subset(ceo, roe > 20)
 
-## 6) Indexing and missing values ---------------------------------------------
+## 7) Indexing and missing values ---------------------------------------------
 na_vector <- c(1, NA, 3, 4)
 is.na(na_vector)
 
