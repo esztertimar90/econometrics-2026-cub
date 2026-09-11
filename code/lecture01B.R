@@ -1,3 +1,12 @@
+# ------------------------------------------------------------------------------
+# Coding basics in R: data viz
+# based on
+#   - Ágoston Reguly, Gábor Békés: Introduction to Data Analysis with R - lecture materials
+#   - Rafael Irizarry: Introduction to Data Science: Data Wrangling and Visualization with R
+
+# Edited using Positron by E. Timár
+# ------------------------------------------------------------------------------
+
 ## 2) Basic data visualization case study: CEO salary ---------------------------------------------------
 rm(list = ls()) #cleans the environment
 
